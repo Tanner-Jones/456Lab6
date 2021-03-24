@@ -25,7 +25,7 @@ def get_details(message):
     message = message.replace("Time delay:", '')
     delay = message[0:message.index("Command")]
     message = message[message.index("Command:"):]
-    message = message.replace("Command", '')
+    message = message.replace("Command:", '')
     command = message
     return count, delay, command
 
@@ -35,7 +35,6 @@ def UDP_server():
     UDPdata, UDPaddr = UDPsock.recvfrom(1024)
     message = UDPdata.decode("utf-8")
     count, delay, command = get_details(message)
-    print("trimmed message")
     print(count, delay, command)
     # prints message to ask user about acceptance
 
@@ -45,7 +44,9 @@ def TCP_server():
     TCPconn, TCPaddr = TCPsock.accept()
     print("Waiting for Connection:")
     TCPdata = TCPconn.recv(1024)
-
+    message = TCPdata.decode("utf-8")
+    count, delay, command = get_details(message)
+    print(count, delay, command)
     # prints message to ask user about acceptance
 
 while True:
