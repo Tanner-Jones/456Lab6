@@ -18,11 +18,24 @@ TCPsock.bind((IP, TCP_PORT_RECEIVE))
 UDPsock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 UDPsock.bind((IP, UDP_PORT_RECEIVE))
 
+def get_details(message):
+    message.replace("Execution Count:", '')
+    count = message[0:message.index("Time Delay:")]
+    message = message[message.index("Time Delay:"):]
+    message.replace("Time Delay:", '')
+    delay = message[0:message.index("Command")]
+    message = message[message.index("Command:"):]
+    message.replace("Command", '')
+    command = message
+    return count, delay, command
+
 def UDP_server():
     #Loop to wait for received messages
     print("Waiting for Connection:")
     UDPdata, UDPaddr = UDPsock.recvfrom(1024)
-    print(UDPdata)
+    message = UDPdata.decode("utf-8")
+    count, delay, command = get_details(message)
+    print(count, delay, command)
     # prints message to ask user about acceptance
 
 def TCP_server():
@@ -31,7 +44,7 @@ def TCP_server():
     TCPconn, TCPaddr = TCPsock.accept()
     print("Waiting for Connection:")
     TCPdata = TCPconn.recv(1024)
-    print(TCPdata)
+
     # prints message to ask user about acceptance
 
 while True:
