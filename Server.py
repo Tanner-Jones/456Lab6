@@ -19,13 +19,13 @@ UDPsock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 UDPsock.bind((IP, UDP_PORT_RECEIVE))
 
 def get_details(message):
-    message.replace("Execution Count:", '')
+    message = message.replace("Execution Count:", '')
     count = message[0:message.index("Time delay:")]
     message = message[message.index("Time delay:"):]
-    message.replace("Time delay:", '')
+    message = message.replace("Time delay:", '')
     delay = message[0:message.index("Command")]
     message = message[message.index("Command:"):]
-    message.replace("Command", '')
+    message = message.replace("Command", '')
     command = message
     return count, delay, command
 
