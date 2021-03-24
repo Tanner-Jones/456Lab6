@@ -17,11 +17,13 @@ def TCP_connection():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((HOSTNAME, Server_port))
     sock.sendall(message)
+    sock.close()
 
 
 def UDP_connection():
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.sendto(message, (HOSTNAME, Server_port))
+    sock.close()
 
 
 
