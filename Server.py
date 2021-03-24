@@ -35,6 +35,7 @@ def UDP_server():
     UDPdata, UDPaddr = UDPsock.recvfrom(1024)
     message = UDPdata.decode("utf-8")
     count, delay, command = get_details(message)
+    print("trimmed message")
     print(count, delay, command)
     # prints message to ask user about acceptance
 
