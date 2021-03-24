@@ -3,7 +3,7 @@ import sys
 
 # collect all command line arguments
 Server_name = sys.argv[1]
-Server_port = sys.argv[2]
+Server_port = int(sys.argv[2])
 Execution_count = sys.argv[3]
 Time_delay = sys.argv[4]
 command = sys.argv[5]
