@@ -20,9 +20,8 @@ UDPsock.bind((IP, UDP_PORT_RECEIVE))
 
 def UDP_server():
     #Loop to wait for received messages
-    UDPconn, UDPaddr = UDPsock.accept()
     print("Waiting for Connection:")
-    UDPdata = UDPconn.recv(1024)
+    UDPdata, UDPaddr = UDPsock.recvfrom(1024)
     print(UDPdata)
     # prints message to ask user about acceptance
 
