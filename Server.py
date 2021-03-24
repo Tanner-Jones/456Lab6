@@ -4,6 +4,7 @@ import time
 
 # Ports and IP initialization
 IP = socket.gethostname()
+print(IP)
 TCP_PORT_RECEIVE = 5005
 TCP_PORT_SEND = 4444
 UDP_PORT_RECEIVE = 5006
