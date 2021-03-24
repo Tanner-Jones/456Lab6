@@ -11,7 +11,7 @@ command = sys.argv[5]
 # create a few necessary variables for rest of program
 HOSTNAME = socket.gethostbyname(Server_name)
 message = "Execution Count:" + Execution_count + "Time delay:" + Time_delay + "Command:" + command
-message = bytes(message)
+message = bytes(message, encoding="utf-8")
 
 def TCP_connection():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
