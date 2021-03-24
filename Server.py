@@ -21,7 +21,6 @@ UDPsock.bind((IP, UDP_PORT_RECEIVE))
 while True:
     #Loop to wait for received messages
     TCPsock.listen(5)
-    UDPsock.listen(5)
     TCPconn, TCPaddr = TCPsock.accept()
     UDPconn, UDPaddr = UDPsock.accept()
     print("Waiting for Connection:")
