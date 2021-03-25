@@ -1,5 +1,6 @@
 import socket
 import sys
+import threading
 
 # collect all command line arguments
 Server_name = sys.argv[1]
@@ -12,6 +13,9 @@ command = sys.argv[5]
 HOSTNAME = socket.gethostbyname(Server_name)
 message = "Execution Count:" + Execution_count + "Time delay:" + Time_delay + "Command:" + command
 message = bytes(message, encoding="utf-8")
+
+
+
 
 def TCP_connection():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -32,7 +36,7 @@ def UDP_connection():
     print(UDPdata.decode("utf-8"))
 
 while True:
-    conn_type = input("TCP or UDP?")
+    conn_type = input("TCP or UDP?\n")
     if conn_type == "TCP":
         TCP_connection()
     elif conn_type == "UDP":
