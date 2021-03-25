@@ -2,6 +2,7 @@ import socket
 import time
 import subprocess
 import sys
+import threading as th
 
 # Ports and IP initialization
 IP = socket.gethostname()
@@ -23,13 +24,15 @@ UDPsock.bind((IP, PORT))
 # output file to write to
 f = open("output", 'w')
 
+def rcend_thread():
+    TCPconn, TCPaddr = TCPsock.accept()
+    global check
+    check = TCPconn.recv(1024)
 
 def run_command(count, delay, command):
-
+    th.Thread(target=rcend_thread, args=(), name='key_capture_thread', daemon=True).start()
     for i in range(0,int(count)):
         if server_type == "TCP":
-            TCPconn, TCPaddr = TCPsock.accept()
-            check = TCPconn.recv(1024)
             if check.decode('utf-8') == "rcend":
                 break
         ran = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
