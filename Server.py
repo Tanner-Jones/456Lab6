@@ -67,7 +67,7 @@ def UDP_server():
     UDPsock_send.sendto(send_message, (UDPaddr[0], PORT))
     # prints message to ask user about acceptance
 
-def TCP_server(TCPconn):
+def TCP_server():
     # block sets up socket and receives command
     TCPsock.listen(5)
     TCPconn, TCPaddr = TCPsock.accept()
