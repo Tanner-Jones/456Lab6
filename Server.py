@@ -10,7 +10,7 @@ TCP_PORT_RECEIVE = 5005
 TCP_PORT_SEND = 4444
 UDP_PORT_RECEIVE = 5006
 UDP_PORT_SEND = 4445
-PORT = sys.argv[1]
+PORT = int(sys.argv[1])
 
 #creates socket object for TCP
 TCPsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
