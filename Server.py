@@ -78,7 +78,6 @@ def TCP_server():
     print("Waiting for Connection:")
     TCPdata = TCPconn.recv(1024)
     message = TCPdata.decode("utf-8")
-    TCPconn.close()
     # collects the three relevant details from message and runs the command
     count, delay, command = get_details(message)
     run_command(count, delay, command)
@@ -86,7 +85,7 @@ def TCP_server():
     # reads output and sends back to client
     f = open("output", 'rb')
     send_message = f.read()
-    TCPconn.sendall(send_message)
+    TCPsock.sendall(send_message)
     # prints message to ask user about acceptance
     TCPsock.close()
 
