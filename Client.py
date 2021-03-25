@@ -27,7 +27,7 @@ def UDP_connection():
     sock.sendto(message, (HOSTNAME, Server_port))
     sock.close()
     sock_receive = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    sock_receive.bind((socket.gethostbyaddr(), Server_port))
+    sock_receive.bind((socket.gethostname(), Server_port))
     UDPdata, UDPaddr = sock_receive.recvfrom(1024)
     print(UDPdata.decode("utf-8"))
 
