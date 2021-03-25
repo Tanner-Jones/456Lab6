@@ -23,7 +23,8 @@ UDPsock.bind((IP, PORT))
 
 # output file to write to
 f = open("output", 'w')
-check = ""
+check = b''
+
 def rcend_thread():
     TCPconn, TCPaddr = TCPsock.accept()
     global check
