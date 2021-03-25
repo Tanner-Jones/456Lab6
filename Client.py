@@ -27,14 +27,14 @@ def UDP_connection():
 
 
 
-
-conn_type = input("TCP or UDP?")
-if conn_type == "TCP":
-    TCP_connection()
-elif conn_type == "UDP":
-    UDP_connection()
-else:
-    print("Invalid input, please try again")
+while True:
+    conn_type = input("TCP or UDP?")
+    if conn_type == "TCP":
+        TCP_connection()
+    elif conn_type == "UDP":
+        UDP_connection()
+    else:
+        print("Invalid input, please try again")
 
 
 
