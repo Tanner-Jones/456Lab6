@@ -23,7 +23,7 @@ def run_command(count, delay, command):
         ran = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         output, err = ran.communicate()
         print('It is', output)
-        time.sleep(delay)
+        time.sleep(int(delay))
 
 
 def get_details(message):
