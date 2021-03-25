@@ -62,7 +62,7 @@ def TCP_server():
     message = TCPdata.decode("utf-8")
     count, delay, command = get_details(message)
     run_command(count, delay, command)
-    f = open("output," 'rb')
+    f = open("output", 'rb')
     send_message = f.read()
     TCPconn.sendall(send_message)
     # prints message to ask user about acceptance
