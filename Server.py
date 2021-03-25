@@ -43,6 +43,7 @@ def UDP_server():
     UDPdata, UDPaddr = UDPsock.recvfrom(1024)
     message = UDPdata.decode("utf-8")
     count, delay, command = get_details(message)
+    run_command(count, delay, command)
     # prints message to ask user about acceptance
 
 def TCP_server():
@@ -53,7 +54,7 @@ def TCP_server():
     TCPdata = TCPconn.recv(1024)
     message = TCPdata.decode("utf-8")
     count, delay, command = get_details(message)
-    run_command()
+    run_command(count, delay, command)
     # prints message to ask user about acceptance
 
 while True:
