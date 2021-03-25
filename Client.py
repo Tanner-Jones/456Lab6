@@ -17,6 +17,8 @@ def TCP_connection():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((HOSTNAME, Server_port))
     sock.sendall(message)
+    data = sock.recvfrom(1024)
+    print(data[0].decode("utf-8"))
     sock.close()
 
 
