@@ -1,6 +1,6 @@
 import socket
 import sys
-import threading
+import threading as th
 
 # collect all command line arguments
 Server_name = sys.argv[1]
@@ -14,13 +14,21 @@ HOSTNAME = socket.gethostbyname(Server_name)
 message = "Execution Count:" + Execution_count + "Time delay:" + Time_delay + "Command:" + command
 message = bytes(message, encoding="utf-8")
 
+check = ''
 
-
+def rcend_thread():
+    global check
+    check = input()
 
 def TCP_connection():
+    th.Thread(target=rcend_thread, args=(), name='key_capture_thread', daemon=True).start()
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((HOSTNAME, Server_port))
     sock.sendall(message)
+    while True:
+        if check == "rcend":
+            sock.sendall(b'rcend')
+            break
     data = sock.recvfrom(1024)
     print(data[0].decode("utf-8"))
     sock.close()
