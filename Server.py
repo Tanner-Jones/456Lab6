@@ -26,7 +26,6 @@ f = open("output", 'w')
 check = b''
 
 def rcend_thread():
-    TCPconn, TCPaddr = TCPsock.accept()
     global check
     check = TCPconn.recv(1024)
 
@@ -74,6 +73,7 @@ def UDP_server():
 def TCP_server():
     # block sets up socket and receives command
     TCPsock.listen(5)
+    global TCPconn
     TCPconn, TCPaddr = TCPsock.accept()
     print("Waiting for Connection:")
     TCPdata = TCPconn.recv(1024)
@@ -85,7 +85,7 @@ def TCP_server():
     # reads output and sends back to client
     f = open("output", 'rb')
     send_message = f.read()
-    TCPsock.sendall(send_message)
+    TCPconn.sendall(send_message)
     # prints message to ask user about acceptance
     TCPsock.close()
 
