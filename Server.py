@@ -21,7 +21,7 @@ UDPsock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 UDPsock.bind((IP, PORT))
 
 # output file to write to
-f = open("output", 'wb')
+f = open("output", 'w')
 
 
 def run_command(count, delay, command):
