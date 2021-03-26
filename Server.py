@@ -44,6 +44,7 @@ def run_command(count, delay, command, addr):
         output_s = addr + "\n" + output_s + time.strftime('%X %x') + "\n\n"
         f.write(output_s)
         time.sleep(int(delay))
+    f.close()
 
 def get_details(message):
     message = message.replace("Execution Count:", '')
