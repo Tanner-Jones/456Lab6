@@ -1,6 +1,7 @@
 import socket
 import sys
 import threading as th
+import time
 
 # collect all command line arguments
 Server_name = sys.argv[1]
@@ -15,23 +16,29 @@ message = "Execution Count:" + Execution_count + "Time delay:" + Time_delay + "C
 message = bytes(message, encoding="utf-8")
 
 check = ''
-
+data = b''
 
 def rcend_thread():
     # thread to check for rcend command
     global check
     check = input()
 
+
 def TCP_connection():
     th.Thread(target=rcend_thread, args=(), name='key_capture_thread', daemon=True).start()
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((HOSTNAME, Server_port))
     sock.sendall(message)
-    sock.settimeout(int(Time_delay) * int(Execution_count) + 2 )
+    end_time = time.time() + Execution_count * Time_delay
+    sock.settimeout(1)
     while True:
+        if time.time() > end_time:
+            break
         if check == "rcend":
             sock.sendall(b'rcend')
             break
+        
+    while True:
         try:
             data = sock.recvfrom(1024)
             print(data[0].decode("utf-8"))
