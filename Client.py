@@ -29,7 +29,7 @@ def TCP_connection():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((HOSTNAME, Server_port))
     sock.sendall(message)
-    end_time = time.time() + Execution_count * Time_delay
+    end_time = time.time() + int(Execution_count) * int(Time_delay) - 2
     sock.settimeout(1)
     while True:
         if time.time() > end_time:
@@ -37,7 +37,7 @@ def TCP_connection():
         if check == "rcend":
             sock.sendall(b'rcend')
             break
-        
+
     while True:
         try:
             data = sock.recvfrom(1024)
