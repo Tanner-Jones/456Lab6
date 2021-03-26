@@ -22,7 +22,6 @@ UDPsock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 UDPsock.bind((IP, PORT))
 
 # output file to write to
-f = open("output", 'w')
 check = b''
 
 def rcend_thread():
@@ -94,6 +93,8 @@ def TCP_server():
 
 
 while True:
+    f = open("output", 'w')
+
     server_type = input("UDP Server or TCP Server? UDP/TCP\n")
 
     if server_type == "UDP":
