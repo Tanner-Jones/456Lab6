@@ -67,11 +67,13 @@ def UDP_server():
     count, delay, command = get_details(message)
     run_command(count, delay, command, UDPaddr[0])
 
-    f = open("output", 'rb')
-    send_message = f.read()
-
     UDPsock_send = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    UDPsock_send.sendto(send_message, (UDPaddr[0], PORT))
+    f = open("output", 'rb')
+    send_message = bytearray(f.read())
+    while len(send_message) > 0:
+        message = bytes(send_message[0:1024])
+        UDPsock_send.sendto(message, (UDPaddr[0], PORT))
+        send_message = send_message[1024:]
     # prints message to ask user about acceptance
 
 def TCP_server():
