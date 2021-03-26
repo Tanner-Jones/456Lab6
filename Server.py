@@ -28,6 +28,7 @@ check = b''
 def rcend_thread():
     # thread to handle when something else is received
     global check
+    global TCPconn
     check = TCPconn.recv(1024)
 
 def run_command(count, delay, command):

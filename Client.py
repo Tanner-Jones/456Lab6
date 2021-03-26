@@ -16,6 +16,7 @@ message = bytes(message, encoding="utf-8")
 
 check = ''
 
+
 def rcend_thread():
     # thread to check for rcend command
     global check
