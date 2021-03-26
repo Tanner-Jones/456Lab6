@@ -30,7 +30,7 @@ def TCP_connection():
     sock.connect((HOSTNAME, Server_port))
     sock.sendall(message)
     end_time = time.time() + int(Execution_count) * int(Time_delay) - 2
-    sock.settimeout(1)
+    sock.settimeout(5)
     while True:
         if time.time() > end_time:
             break
