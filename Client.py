@@ -62,7 +62,7 @@ def UDP_connection():
     sock_receive.settimeout(3)
     while True:
         try:
-            UDPdata, UDPaddr = sock_receive.recvfrom(1024)
+            UDPdata, UDPaddr = sock_receive.recvfrom(4096)
             display = display + UDPdata.decode("utf-8")
         except socket.timeout:
             break
