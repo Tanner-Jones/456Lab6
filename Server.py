@@ -26,15 +26,17 @@ f = open("output", 'w')
 check = b''
 
 def rcend_thread():
+    # thread to handle when something else is received
     global check
     check = TCPconn.recv(1024)
 
 def run_command(count, delay, command):
-    th.Thread(target=rcend_thread, args=(), name='key_capture_thread', daemon=True).start()
+    # command run
     for i in range(0,int(count)):
         if server_type == "TCP":
             if check.decode('utf-8') == "rcend":
                 break
+        # loop for execution times
         ran = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         output, err = ran.communicate()
         output_s = output.decode("utf-8")
@@ -71,6 +73,7 @@ def UDP_server():
     # prints message to ask user about acceptance
 
 def TCP_server():
+    th.Thread(target=rcend_thread, args=(), name='key_capture_thread', daemon=True).start()
     # block sets up socket and receives command
     TCPsock.listen(5)
     global TCPconn

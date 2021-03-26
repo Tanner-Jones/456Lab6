@@ -17,6 +17,7 @@ message = bytes(message, encoding="utf-8")
 check = ''
 
 def rcend_thread():
+    # thread to check for rcend command
     global check
     check = input()
 
@@ -25,12 +26,18 @@ def TCP_connection():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((HOSTNAME, Server_port))
     sock.sendall(message)
+    sock.settimeout(2)
     while True:
         if check == "rcend":
             sock.sendall(b'rcend')
             break
-    data = sock.recvfrom(1024)
-    print(data[0].decode("utf-8"))
+        try:
+            data = sock.recvfrom(1024)
+            print(data[0].decode("utf-8"))
+        except socket.timeout:
+            break
+        except socket.error:
+            break
     sock.close()
 
 
