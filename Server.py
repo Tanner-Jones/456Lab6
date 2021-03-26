@@ -41,7 +41,7 @@ def run_command(count, delay, command):
         output, err = ran.communicate()
         output_s = output.decode("utf-8")
         print(time.strftime('%X %x'), output_s)
-        output_s = output_s + time.strftime('%X %x') + "\n"
+        output_s = TCPaddr + output_s + time.strftime('%X %x') + "\n"
         f.write(output_s)
         time.sleep(int(delay))
     f.close()
@@ -76,6 +76,7 @@ def TCP_server():
     # block sets up socket and receives command
     TCPsock.listen(5)
     global TCPconn
+    global TCPaddr
     TCPconn, TCPaddr = TCPsock.accept()
     th.Thread(target=rcend_thread, args=(), name='key_capture_thread', daemon=True).start()
     print("Waiting for Connection:")
