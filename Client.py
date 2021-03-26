@@ -58,6 +58,7 @@ def UDP_connection():
     sock_receive = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock_receive.bind((socket.gethostname(), Server_port))
     UDPdata, UDPaddr = sock_receive.recvfrom(1024)
+    print(UDPdata)
     display = UDPdata[0].decode("utf-8")
     sock_receive.settimeout(3)
     while display:
