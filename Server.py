@@ -35,8 +35,12 @@ def run_command(count, delay, command, addr):
         if server_type == "TCP":
             if check.decode('utf-8') == "rcend":
                 break
-        # loop for execution times
-        ran = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        command_list = command.split(" ")
+        if len(command_list) > 1:
+            ran = subprocess.Popen(command_list[0], command_list[1] stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        else:
+            # loop for execution times
+            ran = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         output, err = ran.communicate()
         output_s = output.decode("utf-8")
         print(time.strftime('%X %x'), output_s)
