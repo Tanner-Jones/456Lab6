@@ -66,7 +66,6 @@ def UDP_server():
     f = open("output", 'rb')
     send_message = f.read()
 
-    UDPsock.close()
     UDPsock_send = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     UDPsock_send.sendto(send_message, (UDPaddr[0], PORT))
     # prints message to ask user about acceptance
