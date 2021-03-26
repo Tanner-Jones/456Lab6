@@ -30,7 +30,7 @@ def rcend_thread():
     global check
     check = TCPconn.recv(1024)
 
-def run_command(count, delay, command):
+def run_command(count, delay, command, addr):
     # command run
     for i in range(0,int(count)):
         if server_type == "TCP":
@@ -41,7 +41,7 @@ def run_command(count, delay, command):
         output, err = ran.communicate()
         output_s = output.decode("utf-8")
         print(time.strftime('%X %x'), output_s)
-        output_s = TCPaddr[0] + "\n" + output_s + time.strftime('%X %x') + "\n\n"
+        output_s = addr + "\n" + output_s + time.strftime('%X %x') + "\n\n"
         f.write(output_s)
         time.sleep(int(delay))
 
@@ -61,7 +61,7 @@ def UDP_server():
     UDPdata, UDPaddr = UDPsock.recvfrom(1024)
     message = UDPdata.decode("utf-8")
     count, delay, command = get_details(message)
-    run_command(count, delay, command)
+    run_command(count, delay, command, UDPaddr[0])
 
     f = open("output", 'rb')
     send_message = f.read()
@@ -83,7 +83,7 @@ def TCP_server():
     message = TCPdata.decode("utf-8")
     # collects the three relevant details from message and runs the command
     count, delay, command = get_details(message)
-    run_command(count, delay, command)
+    run_command(count, delay, command, TCPaddr[0])
 
     # reads output and sends back to client
     f = open("output", 'rb')
