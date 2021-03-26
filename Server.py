@@ -41,7 +41,7 @@ def run_command(count, delay, command):
         output, err = ran.communicate()
         output_s = output.decode("utf-8")
         print(time.strftime('%X %x'), output_s)
-        output_s = TCPaddr[0] "\n" + output_s + time.strftime('%X %x') + "\n\n"
+        output_s = TCPaddr[0] + "\n" + output_s + time.strftime('%X %x') + "\n\n"
         f.write(output_s)
         time.sleep(int(delay))
 
