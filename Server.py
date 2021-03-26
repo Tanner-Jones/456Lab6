@@ -41,10 +41,9 @@ def run_command(count, delay, command):
         output, err = ran.communicate()
         output_s = output.decode("utf-8")
         print(time.strftime('%X %x'), output_s)
-        output_s = TCPaddr[0] + output_s + time.strftime('%X %x') + "\n"
+        output_s = TCPaddr[0] "\n" + output_s + time.strftime('%X %x') + "\n\n"
         f.write(output_s)
         time.sleep(int(delay))
-    f.close()
 
 def get_details(message):
     message = message.replace("Execution Count:", '')
@@ -91,7 +90,6 @@ def TCP_server():
     send_message = f.read()
     TCPconn.sendall(send_message)
     # prints message to ask user about acceptance
-    TCPsock.close()
 
 
 while True:
