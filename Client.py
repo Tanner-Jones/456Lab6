@@ -31,6 +31,7 @@ def TCP_connection():
     sock.sendall(message)
     end_time = time.time() + int(Execution_count) * int(Time_delay) - 2
     sock.settimeout(5)
+    display = ""
     while True:
         if time.time() > end_time:
             break
@@ -41,11 +42,12 @@ def TCP_connection():
     while True:
         try:
             data = sock.recvfrom(1024)
-            print(data[0].decode("utf-8"))
+            display = display + data[0].decode("utf-8")
         except socket.timeout:
             break
         except socket.error:
             break
+    print(display)
     sock.close()
 
 
@@ -55,8 +57,17 @@ def UDP_connection():
     sock.close()
     sock_receive = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock_receive.bind((socket.gethostname(), Server_port))
-    UDPdata, UDPaddr = sock_receive.recvfrom(1024)
-    print(UDPdata.decode("utf-8"))
+    sock_receive.settimeout(5)
+    display = ""
+    while True:
+        try:
+            UDPdata, UDPaddr = sock_receive.recvfrom(1024)
+            display = display + UDPdata[0].decode("utf-8")
+        except socket.timeout:
+            break
+        except socket.error:
+            break
+    print(display)
     sock_receive.close()
 
 conn_type = input("TCP or UDP?\n")
