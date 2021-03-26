@@ -37,7 +37,7 @@ def run_command(count, delay, command, addr):
                 break
         command_list = command.split(" ")
         if len(command_list) > 1:
-            ran = subprocess.Popen(command_list[0], command_list[1], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            ran = subprocess.Popen([command_list[0], command_list[1]], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         else:
             # loop for execution times
             ran = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
