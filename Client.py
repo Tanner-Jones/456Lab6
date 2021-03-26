@@ -59,12 +59,12 @@ def UDP_connection():
     sock_receive.bind((socket.gethostname(), Server_port))
     UDPdata, UDPaddr = sock_receive.recvfrom(1024)
     print(UDPdata)
-    display = UDPdata[0].decode("utf-8")
+    display = UDPdata.decode("utf-8")
     sock_receive.settimeout(3)
     while display:
         try:
             UDPdata, UDPaddr = sock_receive.recvfrom(1024)
-            display = display + UDPdata[0].decode("utf-8")
+            display = display + UDPdata.decode("utf-8")
         except socket.timeout:
             break
         except socket.error:
