@@ -73,11 +73,11 @@ def UDP_server():
     # prints message to ask user about acceptance
 
 def TCP_server():
-    th.Thread(target=rcend_thread, args=(), name='key_capture_thread', daemon=True).start()
     # block sets up socket and receives command
     TCPsock.listen(5)
     global TCPconn
     TCPconn, TCPaddr = TCPsock.accept()
+    th.Thread(target=rcend_thread, args=(), name='key_capture_thread', daemon=True).start()
     print("Waiting for Connection:")
     TCPdata = TCPconn.recv(1024)
     message = TCPdata.decode("utf-8")
