@@ -57,9 +57,10 @@ def UDP_connection():
     sock.close()
     sock_receive = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock_receive.bind((socket.gethostname(), Server_port))
-    sock_receive.settimeout(5)
-    display = ""
-    while True:
+    UDPdata, UDPaddr = sock_receive.recvfrom(1024)
+    display = UDPdata[0].decode("utf-8")
+    sock_receive.settimeout(3)
+    while display:
         try:
             UDPdata, UDPaddr = sock_receive.recvfrom(1024)
             display = display + UDPdata[0].decode("utf-8")
