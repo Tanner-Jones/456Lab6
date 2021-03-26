@@ -93,15 +93,15 @@ def TCP_server():
     TCPsock.close()
 
 
+while True:
+    server_type = input("UDP Server or TCP Server? UDP/TCP\n")
 
-server_type = input("UDP Server or TCP Server? UDP/TCP\n")
-
-if server_type == "UDP":
-    UDP_server()
-elif server_type == "TCP":
-    TCP_server()
-else:
-    print("Invalid Entry, please try again")
+    if server_type == "UDP":
+        UDP_server()
+    elif server_type == "TCP":
+        TCP_server()
+    else:
+        print("Invalid Entry, please try again")
 
 
 

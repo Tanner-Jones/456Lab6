@@ -57,15 +57,15 @@ def UDP_connection():
     sock_receive.bind((socket.gethostname(), Server_port))
     UDPdata, UDPaddr = sock_receive.recvfrom(1024)
     print(UDPdata.decode("utf-8"))
+    sock_receive.close()
 
-while True:
-    conn_type = input("TCP or UDP?\n")
-    if conn_type == "TCP":
-        TCP_connection()
-    elif conn_type == "UDP":
-        UDP_connection()
-    else:
-        print("Invalid input, please try again")
+conn_type = input("TCP or UDP?\n")
+if conn_type == "TCP":
+    TCP_connection()
+elif conn_type == "UDP":
+    UDP_connection()
+else:
+    print("Invalid input, please try again")
 
 
 
